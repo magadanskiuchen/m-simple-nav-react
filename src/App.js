@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import AddressInput from './components/AddressInput';
+import LatLngInput from './components/LatLngInput';
+import FavoritesInput from './components/FavoritesInput';
 
 import './App.css';
 
@@ -26,14 +28,14 @@ function App() {
 				
 				<div className="destination-input">
 					<Switch>
-						<Route path="/">
-							<AddressInput />
-						</Route>
 						<Route path="/lat-lng">
-							
+							<LatLngInput />
 						</Route>
 						<Route path="/favorites">
-							
+							<FavoritesInput />
+						</Route>
+						<Route path="/">
+							<AddressInput />
 						</Route>
 					</Switch>
 				</div>

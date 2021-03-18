@@ -1,11 +1,12 @@
 import React from 'react';
 
-class AddressInput extends React.Component {
+class LatLngInput extends React.Component {
 	render() {
 		return (
-			<form className="location-input location-input--address">
+			<form className="location-input location-input--lat-lng">
 				<div className="location-input__fields">
-					<input type="text" placeholder="Address" />
+					<input type="text" placeholder="Latitude" />
+					<input type="text" placeholder="Longitude" />
 				</div>
 				
 				<footer className="location-input__footer">
@@ -16,4 +17,4 @@ class AddressInput extends React.Component {
 	}
 }
 
-export default AddressInput;
+export default LatLngInput;
