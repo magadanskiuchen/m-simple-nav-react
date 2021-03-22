@@ -20,19 +20,19 @@ function App() {
 				
 				<div className="destination-input">
 					<Switch>
-						<Route path="/lat-lng">
+						<Route exact path="/">
+							<LocationInput className="location-input--address">
+								<input type="text" placeholder="Address" />
+							</LocationInput>
+						</Route>
+						<Route exact path="/lat-lng">
 							<LocationInput className="location-input--lat-lng">
 								<input type="text" placeholder="Latitude" />
 								<input type="text" placeholder="Longitude" />
 							</LocationInput>
 						</Route>
-						<Route path="/favorites">
+						<Route exact path="/favorites">
 							<FavoritesInput />
-						</Route>
-						<Route path="/">
-							<LocationInput className="location-input--address">
-								<input type="text" placeholder="Address" />
-							</LocationInput>
 						</Route>
 					</Switch>
 				</div>

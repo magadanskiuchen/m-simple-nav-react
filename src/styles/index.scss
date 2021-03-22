@@ -1,3 +1,11 @@
+:root {
+	// colors
+	--white: #FFF;
+	--black: #000;
+	--blue: #8AF;
+	--dark-blue: #46D;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -9,8 +17,8 @@ html, body {
 }
 
 body {
-	background: #FFF;
-	color: #000;
+	background: var(--white);
+	color: var(--black);
 	font: normal 16px/1.35 Arial, Helvetica, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

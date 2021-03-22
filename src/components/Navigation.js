@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import '../styles/Navigation.scss';
 
 export default function Navigation(props) {
-	return <nav>
-		<ul className="header__list">
-			{props.links.map(l => <li className="header__list_item"><Link key={l.url} to={l.url}>{l.label}</Link></li> )}
+	return <nav className="navigation">
+		<ul className="navigation__list">
+			{props.links.map(l => <li key={l.url} className="navigation__list_item">
+				<NavLink exact className="navigation__link" key={l.url + '-link'} to={l.url}>{l.label}</NavLink>
+			</li> )}
 		</ul>
 	</nav>;
 }

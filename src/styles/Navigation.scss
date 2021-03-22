@@ -1,0 +1,28 @@
+.navigation {
+	background: var(--blue);
+	
+	&__list {
+		display: flex;
+		list-style: none;
+	}
+	
+	&__list_item {
+		flex-grow: 1;
+		text-align: center;
+	}
+	
+	&__link {
+		display: block;
+		padding-top: 1em;
+		padding-bottom: 1em;
+		color: var(--black);
+		font-weight: bold;
+		text-decoration: none;
+		
+		&:hover,
+		&.active {
+			background: var(--dark-blue);
+			color: var(--white);
+		}
+	}
+}
