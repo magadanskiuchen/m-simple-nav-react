@@ -7,7 +7,7 @@ export default function Header(props) {
 	return <header className="header">
 		<nav>
 			<ul>
-				{props.links.map(l => <Link to={l.url}>{l.label}</Link> )}
+				{props.links.map(l => <Link key={l.url} to={l.url}>{l.label}</Link> )}
 			</ul>
 		</nav>
 	</header>;
