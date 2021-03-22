@@ -4,7 +4,7 @@ import Header from './components/Header';
 import LocationInput from './components/LocationInput';
 import FavoritesInput from './components/FavoritesInput';
 
-import './App.css';
+import './styles/App.css';
 
 function App() {
 	return (
