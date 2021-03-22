@@ -1,5 +1,6 @@
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import Header from './components/Header';
 import LocationInput from './components/LocationInput';
 import FavoritesInput from './components/FavoritesInput';
 
@@ -9,21 +10,11 @@ function App() {
 	return (
 		<div className="app">
 			<Router>
-				<header className="header">
-					<nav>
-						<ul>
-							<li>
-								<Link to="/">Address</Link>
-							</li>
-							<li>
-								<Link to="/lat-lng">Lat/Lng</Link>
-							</li>
-							<li>
-								<Link to="/favorites">Favorites</Link>
-							</li>
-						</ul>
-					</nav>
-				</header>
+				<Header links={[
+					{ url: '/', label: 'Address' },
+					{ url: '/lat-lng', label: 'Lat/Lng' },
+					{ url: '/favorites', label: 'Favorites' }
+				]} />
 				
 				<div className="destination-input">
 					<Switch>
