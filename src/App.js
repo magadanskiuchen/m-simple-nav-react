@@ -32,7 +32,13 @@ function App() {
 							</LocationInput>
 						</Route>
 						<Route exact path="/favorites">
-							<FavoritesInput />
+							<FavoritesInput favoritePlaces={[
+								{ id: 1, name: 'Shumen Home', lat: 43.2658149, lng: 26.9442749 },
+								{ id: 2, name: 'Shumen Hristo', lat: 43.2715686, lng: 26.9259447 },
+								{ id: 3, name: 'Varna Home', lat: 43.2162011, lng: 27.890922 },
+								{ id: 4, name: 'Varna Office', lat: 43.2258173, lng: 27.8510748 },
+								{ id: 5, name: 'Varna House', lat: 43.215770, lng: 27.958105 }
+							]} />
 						</Route>
 					</Switch>
 				</div>
