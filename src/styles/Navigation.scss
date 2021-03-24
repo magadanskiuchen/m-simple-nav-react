@@ -1,6 +1,4 @@
 .navigation {
-	background: var(--blue);
-	
 	&__list {
 		display: flex;
 		list-style: none;
@@ -15,14 +13,5 @@
 		display: block;
 		padding-top: 1em;
 		padding-bottom: 1em;
-		color: var(--black);
-		font-weight: bold;
-		text-decoration: none;
-		
-		&:hover,
-		&.active {
-			background: var(--dark-blue);
-			color: var(--white);
-		}
 	}
 }

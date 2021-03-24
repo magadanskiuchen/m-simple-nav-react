@@ -22,13 +22,13 @@ function App() {
 					<Switch>
 						<Route exact path="/">
 							<LocationInput className="location-input--address">
-								<input type="text" placeholder="Address" />
+								<input className="location-input__field" type="text" placeholder="Address" />
 							</LocationInput>
 						</Route>
 						<Route exact path="/lat-lng">
 							<LocationInput className="location-input--lat-lng">
-								<input type="text" placeholder="Latitude" />
-								<input type="text" placeholder="Longitude" />
+								<input className="location-input__field" type="text" placeholder="Latitude" />
+								<input className="location-input__field" type="text" placeholder="Longitude" />
 							</LocationInput>
 						</Route>
 						<Route exact path="/favorites">

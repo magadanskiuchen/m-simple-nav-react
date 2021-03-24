@@ -1,6 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 
+import '../styles/LocationInput.scss';
+
 export default function LocationInput(props) {
 	return <form className={classnames('location-input', props.className)}>
 		<div className="location-input__fields">
@@ -8,7 +10,7 @@ export default function LocationInput(props) {
 		</div>
 		
 		<footer className="location-input__footer">
-			<input type="submit" value="Search" />
+			<input className="location-input__field btn" type="submit" value="Search" />
 		</footer>
 	</form>;
 }

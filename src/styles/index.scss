@@ -4,6 +4,7 @@
 	--black: #000;
 	--blue: #8AF;
 	--dark-blue: #46D;
+	--navy: #049;
 }
 
 * {
@@ -22,4 +23,21 @@ body {
 	font: normal 16px/1.35 Arial, Helvetica, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+	.btn {
+		background: var(--blue);
+		border: none;
+		color: var(--black);
+		font-weight: bold;
+		text-decoration: none;
+		cursor: pointer;
+		
+		&:hover,
+		&.active {
+			background: var(--dark-blue);
+			color: var(--white);
+		}
+	}
 }
