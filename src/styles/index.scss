@@ -2,6 +2,7 @@
 	// colors
 	--white: #FFF;
 	--black: #000;
+	--light-blue: #E6E6FF;
 	--blue: #8AF;
 	--dark-blue: #46D;
 	--navy: #049;
@@ -23,6 +24,10 @@ body {
 	font: normal 16px/1.35 Arial, Helvetica, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+button {
+	cursor: pointer;
 }
 
 #root {

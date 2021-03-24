@@ -1,0 +1,6 @@
+@mixin notext {
+	text-indent: -5000em;
+	font-size: 0;
+	line-height: 0;
+	color: transparent;
+}
