@@ -28,6 +28,7 @@
 .ico {
 	@include notext;
 	
+	position: relative;
 	width: 1.75rem;
 	height: 1.75rem;
 	margin-top: -0.25rem;
@@ -41,17 +42,41 @@
 		margin-left: 1rem;
 	}
 	
-	&--edit {
-		position: relative;
+	&:before {
+		position: absolute;
+		width: 60%;
+		height: 60%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		filter: invert(10%) sepia(60%) saturate(7500%) hue-rotate(205deg);
+	}
+	
+	&:hover {
+		border-color: transparent;
+		background: var(--navy);
 		
 		&:before {
+			filter: invert(99%) sepia(0%) saturate(500%) hue-rotate(0deg);
+		}
+	}
+	
+	&--edit {
+		&:before {
 			content: url('../assets/icons/pen-solid.svg');
-			position: absolute;
-			width: 75%;
-			height: 75%;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
+		}
+	}
+	
+	&--delete {
+		border-color: var(--red);
+		
+		&:before {
+			content: url('../assets/icons/trash-solid.svg');
+			filter: invert(10%) sepia(40%) saturate(9500%) hue-rotate(355deg);
+		}
+		
+		&:hover {
+			background: var(--red);
 		}
 	}
 }
