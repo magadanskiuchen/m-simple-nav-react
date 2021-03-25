@@ -8,6 +8,17 @@ import './styles/App.scss';
 import './styles/ico.scss';
 
 function App() {
+	const onAddressSubmit = e => {
+		e.preventDefault();
+		
+		console.log('onAddressSubmit', e);
+	};
+	
+	const onLatLngSubmit = e => {
+		e.preventDefault();
+		
+		console.log('onLatLngSubmit', e);
+	};
 	return (
 		<div className="app">
 			<Router>
@@ -22,14 +33,14 @@ function App() {
 				<div className="destination-input">
 					<Switch>
 						<Route exact path="/">
-							<LocationInput className="location-input--address">
-								<input className="location-input__field" type="text" placeholder="Address" />
+							<LocationInput className="location-input--address" onSubmit={onAddressSubmit}>
+								<input name="address" className="location-input__field" type="text" placeholder="Address" />
 							</LocationInput>
 						</Route>
 						<Route exact path="/lat-lng">
-							<LocationInput className="location-input--lat-lng">
-								<input className="location-input__field" type="text" placeholder="Latitude" />
-								<input className="location-input__field" type="text" placeholder="Longitude" />
+							<LocationInput className="location-input--lat-lng" onSubmit={onLatLngSubmit}>
+								<input name="lat" className="location-input__field" type="text" placeholder="Latitude" />
+								<input name="lng" className="location-input__field" type="text" placeholder="Longitude" />
 							</LocationInput>
 						</Route>
 						<Route exact path="/favorites">

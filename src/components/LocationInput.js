@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import '../styles/LocationInput.scss';
 
 export default function LocationInput(props) {
-	return <form className={classnames('location-input', props.className)}>
+	return <form className={classnames('location-input', props.className)} onSubmit={props.onSubmit}>
 		<div className="location-input__fields">
 			{props.children}
 		</div>
