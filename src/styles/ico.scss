@@ -1,0 +1,75 @@
+@import 'mixins.scss';
+
+.ico {
+	@include notext;
+	
+	position: relative;
+	width: 1.75rem;
+	height: 1.75rem;
+	margin-top: -0.25rem;
+	margin-bottom: -0.25rem;
+	background: none;
+	border: 1px solid var(--black);
+	border-radius: 50%;
+	overflow: hidden;
+	
+	& + & {
+		margin-left: 1rem;
+	}
+	
+	&:before {
+		position: absolute;
+		width: 60%;
+		height: 60%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		filter: invert(10%) sepia(60%) saturate(7500%) hue-rotate(205deg);
+	}
+	
+	&:hover {
+		border-color: transparent;
+		background: var(--navy);
+		
+		&:before {
+			filter: invert(99%) sepia(0%) saturate(500%) hue-rotate(0deg);
+		}
+	}
+	
+	&--search {
+		&:before {
+			content: url('../assets/icons/search-solid.svg');
+		}
+	}
+	
+	&--marker {
+		&:before {
+			content: url('../assets/icons/map-marker-solid.svg');
+		}
+	}
+	
+	&--favorite {
+		&:before {
+			content: url('../assets/icons/heart-solid.svg');
+		}
+	}
+	
+	&--edit {
+		&:before {
+			content: url('../assets/icons/pen-solid.svg');
+		}
+	}
+	
+	&--delete {
+		border-color: var(--red);
+		
+		&:before {
+			content: url('../assets/icons/trash-solid.svg');
+			filter: invert(10%) sepia(40%) saturate(9500%) hue-rotate(355deg);
+		}
+		
+		&:hover {
+			background: var(--red);
+		}
+	}
+}

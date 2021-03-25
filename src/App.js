@@ -5,6 +5,7 @@ import LocationInput from './components/LocationInput';
 import FavoritesInput from './components/FavoritesInput';
 
 import './styles/App.scss';
+import './styles/ico.scss';
 
 function App() {
 	return (
@@ -12,9 +13,9 @@ function App() {
 			<Router>
 				<header className="header">
 					<Navigation links={[
-						{ url: '/', label: 'Address' },
-						{ url: '/lat-lng', label: 'Lat/Lng' },
-						{ url: '/favorites', label: 'Favorites' }
+						{ url: '/', label: 'Address', ico: 'search' },
+						{ url: '/lat-lng', label: 'Lat/Lng', ico: 'marker' },
+						{ url: '/favorites', label: 'Favorites', ico: 'favorite' }
 					]} />
 				</header>
 				
