@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Navigation from './components/Navigation';
@@ -8,6 +9,10 @@ import './styles/App.scss';
 import './styles/ico.scss';
 
 function App() {
+	const [address, setAddress] = useState('');
+	const [lat, setLat] = useState(0);
+	const [lng, setLng] = useState(0);
+	
 	const onAddressSubmit = e => {
 		e.preventDefault();
 		
@@ -33,14 +38,14 @@ function App() {
 				<div className="destination-input">
 					<Switch>
 						<Route exact path="/">
-							<LocationInput className="location-input--address" onSubmit={onAddressSubmit}>
-								<input name="address" className="location-input__field" type="text" placeholder="Address" />
+							<LocationInput key="location-input--address" className="location-input--address" onSubmit={onAddressSubmit}>
+								<input name="address" className="location-input__field" type="text" placeholder="Address" value={address} onChange={e => setAddress(e.target.value)} />
 							</LocationInput>
 						</Route>
 						<Route exact path="/lat-lng">
-							<LocationInput className="location-input--lat-lng" onSubmit={onLatLngSubmit}>
-								<input name="lat" className="location-input__field" type="text" placeholder="Latitude" />
-								<input name="lng" className="location-input__field" type="text" placeholder="Longitude" />
+							<LocationInput key="location-input--lat-lng" className="location-input--lat-lng" onSubmit={onLatLngSubmit}>
+								<input name="lat" className="location-input__field" type="text" placeholder="Latitude" value={lat || ''} onChange={e => setLat(e.target.value)} />
+								<input name="lng" className="location-input__field" type="text" placeholder="Longitude" value={lng || ''} onChange={e => setLng(e.target.value)} />
 							</LocationInput>
 						</Route>
 						<Route exact path="/favorites">
