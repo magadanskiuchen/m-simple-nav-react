@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Script from 'react-load-script';
+
+import MapsSDKState from './lib/MapsSDKState';
 
 import Navigation from './components/Navigation';
 import LocationInput from './components/LocationInput';
@@ -9,6 +12,7 @@ import './styles/App.scss';
 import './styles/ico.scss';
 
 function App() {
+	const [mapsSDKState, setMapsSDKState] = useState(MapsSDKState.LOADING);
 	const [address, setAddress] = useState('');
 	const [lat, setLat] = useState(0);
 	const [lng, setLng] = useState(0);
@@ -38,9 +42,20 @@ function App() {
 				<div className="destination-input">
 					<Switch>
 						<Route exact path="/">
-							<LocationInput key="location-input--address" className="location-input--address" onSubmit={onAddressSubmit}>
+							<Script
+								url={'https://maps.googleapis.com/maps/api/js?key=' + process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+								onCreate={() => setMapsSDKState(MapsSDKState.LOADING)}
+								onError={() => setMapsSDKState(MapsSDKState.ERROR)}
+								onLoad={() => setMapsSDKState(MapsSDKState.LOADED)}
+							/>
+							
+							{mapsSDKState === MapsSDKState.LOADING && <p className="message">Loading</p>}
+							
+							{mapsSDKState === MapsSDKState.ERROR && <p className="message message-error">Error</p>}
+							
+							{mapsSDKState === MapsSDKState.LOADED && <LocationInput key="location-input--address" className="location-input--address" onSubmit={onAddressSubmit}>
 								<input name="address" className="location-input__field" type="text" placeholder="Address" value={address} onChange={e => setAddress(e.target.value)} />
-							</LocationInput>
+							</LocationInput>}
 						</Route>
 						<Route exact path="/lat-lng">
 							<LocationInput key="location-input--lat-lng" className="location-input--lat-lng" onSubmit={onLatLngSubmit}>
