@@ -1,0 +1,10 @@
+.message {
+	padding: 1rem;
+	background: var(--light-blue);
+	border: 2px solid var(--navy);
+	
+	&--error {
+		background: var(--pink);
+		border-color: var(--red);
+	}
+}

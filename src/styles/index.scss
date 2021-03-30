@@ -6,6 +6,7 @@
 	--blue: #8AF;
 	--dark-blue: #46D;
 	--navy: #049;
+	--pink: #FDD;
 	--red: #900;
 }
 
@@ -29,6 +30,14 @@ body {
 
 button {
 	cursor: pointer;
+}
+
+p {
+	padding-bottom: 1em;
+	
+	&:last-child {
+		padding-bottom: 0;
+	}
 }
 
 #root {

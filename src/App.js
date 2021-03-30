@@ -7,6 +7,7 @@ import MapsSDKState from './lib/MapsSDKState';
 import Navigation from './components/Navigation';
 import LocationInput from './components/LocationInput';
 import FavoritesInput from './components/FavoritesInput';
+import Message from './components/Message';
 
 import './styles/App.scss';
 import './styles/ico.scss';
@@ -49,9 +50,13 @@ function App() {
 								onLoad={() => setMapsSDKState(MapsSDKState.LOADED)}
 							/>
 							
-							{mapsSDKState === MapsSDKState.LOADING && <p className="message">Loading</p>}
+							{mapsSDKState === MapsSDKState.LOADING && <Message>Loading</Message>}
 							
-							{mapsSDKState === MapsSDKState.ERROR && <p className="message message-error">Error</p>}
+							{mapsSDKState === MapsSDKState.ERROR && <Message error>
+								<p><strong>Error:</strong> could not load Google Maps JS SDK.</p>
+								
+								<p>This may be expected if you're offline. If so, please either use direct GPS coordinates input or select a destination from your favorites.</p>
+							</Message>}
 							
 							{mapsSDKState === MapsSDKState.LOADED && <LocationInput key="location-input--address" className="location-input--address" onSubmit={onAddressSubmit}>
 								<input name="address" className="location-input__field" type="text" placeholder="Address" value={address} onChange={e => setAddress(e.target.value)} />
