@@ -8,6 +8,7 @@ import Navigation from './components/Navigation';
 import LocationInput from './components/LocationInput';
 import FavoritesInput from './components/FavoritesInput';
 import Message from './components/Message';
+import AddToFavorites from './components/AddToFavorites';
 
 import './styles/App.scss';
 import './styles/ico.scss';
@@ -83,6 +84,8 @@ function App() {
 								{ id: 4, name: 'Varna Office', lat: 43.2258173, lng: 27.8510748 },
 								{ id: 5, name: 'Varna House', lat: 43.215770, lng: 27.958105 }
 							]} />
+							
+							{address && <AddToFavorites name={address} lat={lat} lng={lng} />}
 						</Route>
 					</Switch>
 				</div>

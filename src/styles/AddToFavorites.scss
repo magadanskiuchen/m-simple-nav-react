@@ -1,0 +1,12 @@
+.add-to-favorites {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+	padding: 1rem;
+	background: var(--light-blue);
+	
+	&__details {
+		padding-bottom: 0;
+	}
+}
