@@ -21,7 +21,14 @@ function App() {
 	const onAddressSubmit = e => {
 		e.preventDefault();
 		
-		console.log('onAddressSubmit', e);
+		const geocoder = new window.google.maps.Geocoder();
+		
+		geocoder.geocode({ address }, (result, status) => {
+			if (status === 'OK' && result.length > 0) {
+				setLat(result[0].geometry.location.lat());
+				setLng(result[0].geometry.location.lng());
+			}
+		});
 	};
 	
 	const onLatLngSubmit = e => {
