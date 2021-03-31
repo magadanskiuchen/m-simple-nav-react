@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Script from 'react-load-script';
 
 import MapsSDKState from './lib/MapsSDKState';
+import db from './lib/db';
 
 import Navigation from './components/Navigation';
 import LocationInput from './components/LocationInput';
@@ -18,6 +19,13 @@ function App() {
 	const [address, setAddress] = useState('');
 	const [lat, setLat] = useState(0);
 	const [lng, setLng] = useState(0);
+	const [favoritePlaces, setFavoritePlaces] = useState([]);
+	
+	useEffect(() => {
+		db.favorites.toArray().then(favorites => {
+			setFavoritePlaces(favorites);
+		});
+	});
 	
 	const onAddressSubmit = e => {
 		e.preventDefault();
@@ -37,6 +45,7 @@ function App() {
 		
 		console.log('onLatLngSubmit', e);
 	};
+	
 	return (
 		<div className="app">
 			<Router>
@@ -77,13 +86,7 @@ function App() {
 							</LocationInput>
 						</Route>
 						<Route exact path="/favorites">
-							<FavoritesInput favoritePlaces={[
-								{ id: 1, name: 'Shumen Home', lat: 43.2658149, lng: 26.9442749 },
-								{ id: 2, name: 'Shumen Hristo', lat: 43.2715686, lng: 26.9259447 },
-								{ id: 3, name: 'Varna Home', lat: 43.2162011, lng: 27.890922 },
-								{ id: 4, name: 'Varna Office', lat: 43.2258173, lng: 27.8510748 },
-								{ id: 5, name: 'Varna House', lat: 43.215770, lng: 27.958105 }
-							]} />
+							{favoritePlaces && <FavoritesInput favoritePlaces={favoritePlaces} />}
 							
 							{address && <AddToFavorites name={address} lat={lat} lng={lng} />}
 						</Route>
