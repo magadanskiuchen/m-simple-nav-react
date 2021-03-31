@@ -16,6 +16,10 @@ export default function AddToFavorites(props) {
 			db.favorites.add({ name, lat: props.lat, lng: props.lng })
 				.then(() => {
 					setMessage('Destination added to favorites');
+					
+					setTimeout(() => {
+						setMessage('');
+					}, 4000);
 				});
 		}
 	};
