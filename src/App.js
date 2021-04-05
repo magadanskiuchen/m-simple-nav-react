@@ -10,6 +10,7 @@ import LocationInput from './components/LocationInput';
 import FavoritesInput from './components/FavoritesInput';
 import Message from './components/Message';
 import AddToFavorites from './components/AddToFavorites';
+import Compass from './components/Compass';
 
 import './styles/App.scss';
 import './styles/ico.scss';
@@ -92,6 +93,8 @@ function App() {
 						</Route>
 					</Switch>
 				</div>
+				
+				<Compass />
 			</Router>
 		</div>
 	);

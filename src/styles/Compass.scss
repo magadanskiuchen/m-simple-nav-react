@@ -1,0 +1,32 @@
+.compass {
+	position: relative;
+	width: 90%;
+	max-width: 18rem;
+	height: 18rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	margin-left: auto;
+	margin-right: auto;
+	border: 3px solid var(--yellow);
+	border-radius: 50%;
+	
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		border-style: solid;
+		border-width: 6rem 2.5rem;
+	}
+	
+	&:before {
+		transform: translate(-100%, -60%);
+		border-color: transparent var(--blue) var(--blue) transparent;
+	}
+	
+	&:after {
+		transform: translate(0%, -60%);
+		border-color: transparent transparent var(--dark-blue) var(--dark-blue);
+	}
+}
