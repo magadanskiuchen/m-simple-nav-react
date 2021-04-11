@@ -47,6 +47,31 @@ function App() {
 		console.log('onLatLngSubmit', e);
 	};
 	
+	const onNewPositionSuccess = (position) => {
+		setCurrentLat(position.coords.latitude);
+		setCurrentLng(position.coords.longitude);
+		setHeading(position.coords.heading);
+	};
+	
+	const onNewPositionFail = (error) => {
+		alert(error.message);
+	};
+	
+	const clearGeoWatch = () => {
+		if (geoWatchId !== 0) {
+			window.navigator.geolocation.clearWatch(geoWatchId);
+			setGeoWatchId(0);
+			setCurrentLat(0);
+			setCurrentLng(0);
+		}
+	};
+	
+	const presentDestination = () => {
+		clearGeoWatch();
+		
+		setGeoWatchId(window.navigator.geolocation.watchPosition(onNewPositionSuccess, onNewPositionFail, { maximumAge: 0 }));
+	};
+	
 	return (
 		<div className="app">
 			<Router>
