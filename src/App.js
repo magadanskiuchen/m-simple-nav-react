@@ -18,8 +18,12 @@ import './styles/ico.scss';
 function App() {
 	const [mapsSDKState, setMapsSDKState] = useState(MapsSDKState.LOADING);
 	const [address, setAddress] = useState('');
-	const [lat, setLat] = useState(0);
-	const [lng, setLng] = useState(0);
+	const [destinationLat, setDestinationLat] = useState(0);
+	const [destinationLng, setDestinationLng] = useState(0);
+	const [geoWatchId, setGeoWatchId] = useState(0);
+	const [currentLat, setCurrentLat] = useState(0);
+	const [currentLng, setCurrentLng] = useState(0);
+	const [heading, setHeading] = useState(0);
 	const [favoritePlaces, setFavoritePlaces] = useState([]);
 	
 	useEffect(() => {
@@ -35,8 +39,12 @@ function App() {
 		
 		geocoder.geocode({ address }, (result, status) => {
 			if (status === 'OK' && result.length > 0) {
-				setLat(result[0].geometry.location.lat());
-				setLng(result[0].geometry.location.lng());
+				setDestinationLat(result[0].geometry.location.lat());
+				setDestinationLng(result[0].geometry.location.lng());
+				
+				presentDestination();
+			} else {
+				alert(status);
 			}
 		});
 	};
@@ -107,14 +115,14 @@ function App() {
 						</Route>
 						<Route exact path="/lat-lng">
 							<LocationInput key="location-input--lat-lng" className="location-input--lat-lng" onSubmit={onLatLngSubmit}>
-								<input name="lat" className="location-input__field" type="text" placeholder="Latitude" value={lat || ''} onChange={e => setLat(e.target.value)} />
-								<input name="lng" className="location-input__field" type="text" placeholder="Longitude" value={lng || ''} onChange={e => setLng(e.target.value)} />
+								<input name="lat" className="location-input__field" type="text" placeholder="Latitude" value={destinationLat || ''} onChange={e => setDestinationLat(e.target.value)} />
+								<input name="lng" className="location-input__field" type="text" placeholder="Longitude" value={destinationLng || ''} onChange={e => setDestinationLng(e.target.value)} />
 							</LocationInput>
 						</Route>
 						<Route exact path="/favorites">
 							{favoritePlaces && <FavoritesInput favoritePlaces={favoritePlaces} />}
 							
-							{address && <AddToFavorites name={address} lat={lat} lng={lng} />}
+							{address && <AddToFavorites name={address} lat={destinationLat} lng={destinationLng} />}
 						</Route>
 					</Switch>
 				</div>
