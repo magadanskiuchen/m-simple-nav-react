@@ -4,6 +4,7 @@ import Script from 'react-load-script';
 
 import MapsSDKState from './lib/MapsSDKState';
 import db from './lib/db';
+import { bearing, distance } from './lib/geospacialCalc';
 
 import Navigation from './components/Navigation';
 import LocationInput from './components/LocationInput';
@@ -25,6 +26,8 @@ function App() {
 	const [currentLng, setCurrentLng] = useState(0);
 	const [heading, setHeading] = useState(0);
 	const [favoritePlaces, setFavoritePlaces] = useState([]);
+	const [locationToDestinationBearing, setLocationToDestinationBearing] = useState(0);
+	const [locationToDestinationDistance, setLocationToDestinationDistance] = useState('')
 	
 	useEffect(() => {
 		db.favorites.toArray().then(favorites => {
@@ -39,8 +42,14 @@ function App() {
 		
 		geocoder.geocode({ address }, (result, status) => {
 			if (status === 'OK' && result.length > 0) {
-				setDestinationLat(result[0].geometry.location.lat());
-				setDestinationLng(result[0].geometry.location.lng());
+				const destLat = result[0].geometry.location.lat();
+				const destLng = result[0].geometry.location.lng();
+				
+				setDestinationLat(destLat);
+				setDestinationLng(destLng);
+				
+				setLocationToDestinationBearing(bearing( { lat: currentLat, lng: currentLng }, { lat: destLat, lng: destLng } ));
+				setLocationToDestinationDistance(distance( { lat: currentLat, lng: currentLng }, { lat: destLat, lng: destLng } ));
 				
 				presentDestination();
 			} else {
@@ -56,8 +65,15 @@ function App() {
 	};
 	
 	const onNewPositionSuccess = (position) => {
-		setCurrentLat(position.coords.latitude);
-		setCurrentLng(position.coords.longitude);
+		const currLat = position.coords.latitude;
+		const currLng = position.coords.longitude;
+		
+		setCurrentLat(currLat);
+		setCurrentLng(currLng);
+		
+		setLocationToDestinationBearing(bearing( { lat: currLat, lng: currLng }, { lat: destinationLat, lng: destinationLng } ));
+		setLocationToDestinationDistance(distance( { lat: currLat, lng: currLng }, { lat: destinationLat, lng: destinationLng } ));
+		
 		setHeading(position.coords.heading);
 	};
 	
@@ -127,7 +143,8 @@ function App() {
 					</Switch>
 				</div>
 				
-				<Compass />
+				<Compass bearing={locationToDestinationBearing} />
+				<p className="distance">{locationToDestinationDistance}</p>
 			</Router>
 		</div>
 	);
