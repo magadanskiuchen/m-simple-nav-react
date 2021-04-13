@@ -21,7 +21,6 @@ function App() {
 	const [address, setAddress] = useState('');
 	const [destinationLat, setDestinationLat] = useState(0);
 	const [destinationLng, setDestinationLng] = useState(0);
-	const [geoWatchId, setGeoWatchId] = useState(0);
 	const [currentLat, setCurrentLat] = useState(0);
 	const [currentLng, setCurrentLng] = useState(0);
 	const [heading, setHeading] = useState(0);
@@ -35,6 +34,11 @@ function App() {
 		});
 	});
 	
+	useEffect(() => {
+		setLocationToDestinationBearing( bearing( { lat: currentLat, lng: currentLng }, { lat: destinationLat, lng: destinationLng } ) );
+		setLocationToDestinationDistance( distance( { lat: currentLat, lng: currentLng }, { lat: destinationLat, lng: destinationLng } ) );
+	}, [currentLat, currentLng, destinationLat, destinationLng]);
+	
 	const onAddressSubmit = e => {
 		e.preventDefault();
 		
@@ -42,16 +46,10 @@ function App() {
 		
 		geocoder.geocode({ address }, (result, status) => {
 			if (status === 'OK' && result.length > 0) {
-				const destLat = result[0].geometry.location.lat();
-				const destLng = result[0].geometry.location.lng();
+				setDestinationLat(result[0].geometry.location.lat());
+				setDestinationLng(result[0].geometry.location.lng());
 				
-				setDestinationLat(destLat);
-				setDestinationLng(destLng);
-				
-				setLocationToDestinationBearing(bearing( { lat: currentLat, lng: currentLng }, { lat: destLat, lng: destLng } ));
-				setLocationToDestinationDistance(distance( { lat: currentLat, lng: currentLng }, { lat: destLat, lng: destLng } ));
-				
-				presentDestination();
+				window.navigator.geolocation.watchPosition(onNewPositionSuccess, onNewPositionFail, { maximumAge: 0 })
 			} else {
 				alert(status);
 			}
@@ -65,35 +63,14 @@ function App() {
 	};
 	
 	const onNewPositionSuccess = (position) => {
-		const currLat = position.coords.latitude;
-		const currLng = position.coords.longitude;
-		
-		setCurrentLat(currLat);
-		setCurrentLng(currLng);
-		
-		setLocationToDestinationBearing(bearing( { lat: currLat, lng: currLng }, { lat: destinationLat, lng: destinationLng } ));
-		setLocationToDestinationDistance(distance( { lat: currLat, lng: currLng }, { lat: destinationLat, lng: destinationLng } ));
+		setCurrentLat(position.coords.latitude);
+		setCurrentLng(position.coords.longitude);
 		
 		setHeading(position.coords.heading);
 	};
 	
 	const onNewPositionFail = (error) => {
 		alert(error.message);
-	};
-	
-	const clearGeoWatch = () => {
-		if (geoWatchId !== 0) {
-			window.navigator.geolocation.clearWatch(geoWatchId);
-			setGeoWatchId(0);
-			setCurrentLat(0);
-			setCurrentLng(0);
-		}
-	};
-	
-	const presentDestination = () => {
-		clearGeoWatch();
-		
-		setGeoWatchId(window.navigator.geolocation.watchPosition(onNewPositionSuccess, onNewPositionFail, { maximumAge: 0 }));
 	};
 	
 	return (

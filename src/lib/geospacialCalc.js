@@ -11,6 +11,10 @@ function bearing(aLatLng, bLatLng) {
 }
 
 function distance(aLatLng, bLatLng) {
+	if (aLatLng.lat === 0 || aLatLng.lng === 0 || bLatLng.lat === 0 || bLatLng.lng === 0) {
+		return;
+	}
+	
 	const aRadLat = Math.PI * aLatLng.lat / 180;
 	const bRadLat = Math.PI * bLatLng.lat / 180;
 	const theta = Math.PI * (aLatLng.lng - bLatLng.lng) / 180;
