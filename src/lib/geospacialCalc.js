@@ -1,13 +1,29 @@
+function radians(deg) {
+	return deg * (Math.PI / 180);
+}
+
+function degrees(rad) {
+	return rad * (180 / Math.PI);
+}
+
 function bearing(aLatLng, bLatLng) {
-	const dL = bLatLng.lng - aLatLng.lng;
+	const startLatRad = radians(aLatLng.lat);
+	const startLngRad = radians(aLatLng.lng);
+	const endLatRad = radians(bLatLng.lat);
+	const endLngRad = radians(bLatLng.lng);
 	
-	const X = Math.cos(bLatLng.lat) * Math.sin(dL);
-	const Y = Math.cos(aLatLng.lat) * Math.sin(bLatLng.lat) - Math.sin(aLatLng.lat) * Math.cos(bLatLng.lat) * Math.cos(dL);
+	let dL = endLngRad - startLngRad;
+	const dPhi = Math.log( Math.tan(endLatRad/2 + Math.PI/4) / Math.tan(startLatRad/2 + Math.PI/4) );
 	
-	const radBearing = Math.atan(X, Y)
-	const degBearing = radBearing * (180/Math.PI);
+	if (Math.abs(dL) > Math.PI) {
+		if (dL > 0) {
+			dL = -(2 * Math.PI - dL);
+		} else {
+			dL = 2 * Math.PI + dL;
+		}
+	}
 	
-	return degBearing;
+	return (degrees(Math.atan2(dL, dPhi)) + 360) % 360;
 }
 
 function distance(aLatLng, bLatLng) {
