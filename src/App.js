@@ -8,7 +8,7 @@ import { bearing, distance } from './lib/geospacialCalc';
 
 import Navigation from './components/Navigation';
 import LocationInput from './components/LocationInput';
-import FavoritesInput from './components/FavoritesInput';
+import FavoritesList from './components/FavoritesList';
 import Message from './components/Message';
 import AddToFavorites from './components/AddToFavorites';
 import Compass from './components/Compass';
@@ -113,7 +113,7 @@ function App() {
 							</LocationInput>
 						</Route>
 						<Route exact path="/favorites">
-							{favoritePlaces && <FavoritesInput favoritePlaces={favoritePlaces} />}
+							{favoritePlaces && <FavoritesList favoritePlaces={favoritePlaces} />}
 							
 							{address && <AddToFavorites name={address} lat={destinationLat} lng={destinationLng} />}
 						</Route>

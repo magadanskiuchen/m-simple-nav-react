@@ -1,8 +1,8 @@
 import React from 'react';
 
-import '../styles/FavoritesInput.scss';
+import '../styles/FavoritesList.scss';
 
-export default function FavoritesInput(props) {
+export default function FavoritesList(props) {
 	return <ul className="favorites-list">
 		{props.favoritePlaces.map(p => <li key={p.id} className="saved-place" data-lat={p.lat} data-lng={p.lng}>
 			<span className="saved-place__label">{p.name}</span>
