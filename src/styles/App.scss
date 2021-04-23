@@ -1,3 +1,17 @@
+@import 'mixins.scss';
+
+.app {
+	padding: 0 1rem;
+}
+
+.header {
+	@include fullWidth;
+}
+
 .destination-input {
-	padding: 1rem;
+	padding-top: 1rem;
+}
+
+.distance {
+	text-align: center;
 }

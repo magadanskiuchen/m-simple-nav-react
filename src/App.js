@@ -36,7 +36,7 @@ function App() {
 	
 	useEffect(() => {
 		setLocationToDestinationBearing( bearing( { lat: currentLat, lng: currentLng }, { lat: destinationLat, lng: destinationLng } ) );
-		setLocationToDestinationDistance( distance( { lat: currentLat, lng: currentLng }, { lat: destinationLat, lng: destinationLng } ) );
+		setLocationToDestinationDistance( distance( { lat: currentLat, lng: currentLng }, { lat: destinationLat, lng: destinationLng } ).toFixed(2) );
 	}, [currentLat, currentLng, destinationLat, destinationLng]);
 	
 	const onAddressSubmit = e => {
@@ -121,7 +121,7 @@ function App() {
 				</div>
 				
 				<Compass bearing={locationToDestinationBearing} />
-				<p className="distance">{locationToDestinationDistance}</p>
+				{locationToDestinationDistance > 0 && <p className="distance">{locationToDestinationDistance}km</p>}
 			</Router>
 		</div>
 	);
