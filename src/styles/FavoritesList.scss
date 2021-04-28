@@ -9,6 +9,7 @@
 	align-items: center;
 	padding: 1rem;
 	border-bottom: 1px solid var(--navy);
+	cursor: pointer;
 	
 	&:nth-child(even) {
 		background: var(--light-blue);

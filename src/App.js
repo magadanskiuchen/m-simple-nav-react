@@ -49,7 +49,7 @@ function App() {
 				setDestinationLat(result[0].geometry.location.lat());
 				setDestinationLng(result[0].geometry.location.lng());
 				
-				window.navigator.geolocation.watchPosition(onNewPositionSuccess, onNewPositionFail, { maximumAge: 0 })
+				window.navigator.geolocation.watchPosition(onNewPositionSuccess, onNewPositionFail, { maximumAge: 0 });
 			} else {
 				alert(status);
 			}
@@ -59,7 +59,7 @@ function App() {
 	const onLatLngSubmit = e => {
 		e.preventDefault();
 		
-		console.log('onLatLngSubmit', e);
+		window.navigator.geolocation.watchPosition(onNewPositionSuccess, onNewPositionFail, { maximumAge: 0 });
 	};
 	
 	const onNewPositionSuccess = (position) => {
@@ -72,6 +72,14 @@ function App() {
 	const onNewPositionFail = (error) => {
 		alert(error.message);
 	};
+	
+	const navigateToPlace = ({ address, lat, lng }) => {
+		setAddress(address);
+		setDestinationLat(lat);
+		setDestinationLng(lng);
+		
+		window.navigator.geolocation.watchPosition(onNewPositionSuccess, onNewPositionFail, { maximumAge: 0 });
+	}
 	
 	return (
 		<div className="app">
@@ -113,7 +121,7 @@ function App() {
 							</LocationInput>
 						</Route>
 						<Route exact path="/favorites">
-							{favoritePlaces && <FavoritesList favoritePlaces={favoritePlaces} />}
+							{favoritePlaces && <FavoritesList favoritePlaces={favoritePlaces} onNavitateToPlace={navigateToPlace} />}
 							
 							{address && <AddToFavorites name={address} lat={destinationLat} lng={destinationLng} />}
 						</Route>
