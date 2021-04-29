@@ -65,8 +65,6 @@ function App() {
 	const onNewPositionSuccess = (position) => {
 		setCurrentLat(position.coords.latitude);
 		setCurrentLng(position.coords.longitude);
-		
-		setHeading(position.coords.heading);
 	};
 	
 	const onNewPositionFail = (error) => {
@@ -79,6 +77,16 @@ function App() {
 		setDestinationLng(lng);
 		
 		window.navigator.geolocation.watchPosition(onNewPositionSuccess, onNewPositionFail, { maximumAge: 0 });
+	}
+	
+	if (window.DeviceOrientationEvent) {
+		window.addEventListener('deviceorientationabsolute', e => {
+			if (e.absolute) {
+				setHeading(-e.alpha);
+			} else if (typeof(e.webkitCompassHeading) !== 'undefined') {
+				setHeading(e.webkitCompassHeading);
+			}
+		});
 	}
 	
 	return (
@@ -128,7 +136,7 @@ function App() {
 					</Switch>
 				</div>
 				
-				<Compass bearing={locationToDestinationBearing} />
+				<Compass bearing={locationToDestinationBearing - heading} />
 				{locationToDestinationDistance > 0 && <p className="distance">{locationToDestinationDistance}km</p>}
 			</Router>
 		</div>
