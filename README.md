@@ -1,3 +1,12 @@
+# M Simple Nav in React
+
+This is a redo of https://github.com/magadanskiuchen/m-simple-nav but in React to do comparison on:
+
+1. development ease (and dev hours spent)
+2. performance
+3. maintenance
+4. browser support
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
