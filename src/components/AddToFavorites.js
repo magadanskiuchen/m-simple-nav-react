@@ -15,6 +15,10 @@ export default function AddToFavorites(props) {
 		if (name) {
 			db.favorites.add({ name, lat: props.lat, lng: props.lng })
 				.then(() => {
+					if (typeof(props.onAdded) === 'function') {
+						props.onAdded();
+					}
+					
 					setMessage('Destination added to favorites');
 					
 					setTimeout(() => {

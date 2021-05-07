@@ -29,15 +29,19 @@ function App() {
 	const [locationToDestinationDistance, setLocationToDestinationDistance] = useState('')
 	
 	useEffect(() => {
-		db.favorites.toArray().then(favorites => {
-			setFavoritePlaces(favorites);
-		});
-	});
+		updateFavoritePlaces();
+	}, []);
 	
 	useEffect(() => {
 		setLocationToDestinationBearing( bearing( { lat: currentLat, lng: currentLng }, { lat: destinationLat, lng: destinationLng } ) );
 		setLocationToDestinationDistance( distance( { lat: currentLat, lng: currentLng }, { lat: destinationLat, lng: destinationLng } ).toFixed(2) );
 	}, [currentLat, currentLng, destinationLat, destinationLng]);
+	
+	const updateFavoritePlaces = () => {
+		db.favorites.toArray().then(favorites => {
+			setFavoritePlaces(favorites);
+		});
+	}
 	
 	const onAddressSubmit = e => {
 		e.preventDefault();
@@ -131,7 +135,7 @@ function App() {
 						<Route exact path="/favorites">
 							{favoritePlaces && <FavoritesList favoritePlaces={favoritePlaces} onNavitateToPlace={navigateToPlace} />}
 							
-							{address && <AddToFavorites name={address} lat={destinationLat} lng={destinationLng} />}
+							{address && <AddToFavorites name={address} lat={destinationLat} lng={destinationLng} onAdded={updateFavoritePlaces} />}
 						</Route>
 					</Switch>
 				</div>
