@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Script from 'react-load-script';
 
@@ -25,17 +25,13 @@ function App() {
 	const [currentLng, setCurrentLng] = useState(0);
 	const [heading, setHeading] = useState(0);
 	const [favoritePlaces, setFavoritePlaces] = useState([]);
-	const [locationToDestinationBearing, setLocationToDestinationBearing] = useState(0);
-	const [locationToDestinationDistance, setLocationToDestinationDistance] = useState('')
+	
+	const locationToDestinationBearing = useMemo(() => bearing( { lat: currentLat, lng: currentLng }, { lat: destinationLat, lng: destinationLng } ), [currentLat, currentLng, destinationLat, destinationLng] );
+	const locationToDestinationDistance = useMemo(() => distance( { lat: currentLat, lng: currentLng }, { lat: destinationLat, lng: destinationLng } ).toFixed(2), [currentLat, currentLng, destinationLat, destinationLng] );
 	
 	useEffect(() => {
 		updateFavoritePlaces();
 	}, []);
-	
-	useEffect(() => {
-		setLocationToDestinationBearing( bearing( { lat: currentLat, lng: currentLng }, { lat: destinationLat, lng: destinationLng } ) );
-		setLocationToDestinationDistance( distance( { lat: currentLat, lng: currentLng }, { lat: destinationLat, lng: destinationLng } ).toFixed(2) );
-	}, [currentLat, currentLng, destinationLat, destinationLng]);
 	
 	const updateFavoritePlaces = () => {
 		db.favorites.toArray().then(favorites => {
